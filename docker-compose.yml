@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+    nginx-rtmp:
+        image: alfg/nginx-rtmp
+        container_name: nginx-rtmp
+        restart: unless-stopped
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf.template
+        environment:
+            - HTTP_PORT=8000
+            - PUBLISH_IP=xxx.xxx.xxx.xxx
+            - X264_THREADS=2
+            - X264_PRESET=veryfast
+            - TRANSCODE_BITRATE=3500k
+            - TRANSCODE_RESOLUTION=1280x720
+            - TRANSCODE_FRAMERATE=60
+            - TWITCH_INGEST=live-iad05
+            - TWITCH_STREAMKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            - YOUTUBE_STREAMKEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ports:
+            - "1935:1935"
+            - "8000:8000"
